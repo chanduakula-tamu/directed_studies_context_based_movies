@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Context Based Movies</title>
+<!--  <link rel="stylesheet" href="{{ url_for('myfunction', filename='style.css') }}">-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Auto Complete -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+  <script type="text/javascript">
+    var films = {{ suggestions| tojson}};
+  </script>
+
+</head>
+
+<body id="content" style="font-family: 'Noto Sans JP', sans-serif;">
+
+  <div class="ml-container" style="display: block;">
+    <!-- <a href="https://github.com/kishan0725/AJAX-Movie-Recommendation-System-with-Sentiment-Analysis" target="_blank"
+      class="github-corner" title="View source on GitHub">
+      <svg data-toggle="tooltip" data-placement="left" width="80" height="80" viewBox="0 0 250 250"
+        style="fill:#e50914; color:#fff; position: fixed;z-index:100; top: 0; border: 0; right: 0;" aria-hidden="true">
+      </svg>
+    </a> -->
+    <button class="btn btn-primary btn-block movie-button"
+      style="background-color: #e50914;text-align: center;border-color: #e50914;width:120px; margin-left: 0%; opacity: 100;"
+      disabled="true"><a href="{{ url_for('logout') }}" style="color: white;">Log Out</a></button>
+    <button class="btn btn-primary btn-block movie-button"
+      style="background-color: #e50914;text-align: center;border-color: #e50914;width:120px; margin-right: 0%; opacity: 100;"
+      disabled="true"><a href="{{ url_for('profile') }}" style="color: white;">My
+        Profile</a></button>
+    <button class="btn btn-primary btn-block movie-button"
+      style="background-color: #e50914;text-align: center;border-color: #e50914;width:120px; margin-right: 0%; opacity: 100;"
+      disabled="true"><a href="{{ url_for('imageSearch') }}" style="color: white;">Image Search</a></button>
+    <center>
+      <h1> Context Based Movies</h1>
+    </center>
+
+
+<!--style>-->
+<!--    body {-->
+<!--        background-color: black;-->
+<!--        color: white;-->
+<!--        font-family: Arial, sans-serif;-->
+<!--        font-size: 16px;-->
+<!--    }-->
+
+<!--    .movie-button {-->
+<!--        background-color: #e50914;-->
+<!--        border-color: #e50914;-->
+<!--        color: white;-->
+<!--        margin-left: 0%;-->
+<!--        opacity: 100;-->
+<!--        text-align: center;-->
+<!--        width: 120px;-->
+<!--    }-->
+
+<!--    .movie-button a {-->
+<!--        color: white;-->
+<!--    }-->
+
+<!--    h1 {-->
+<!--        font-size: 50px;-->
+<!--    }-->
+
+<!--    table {-->
+<!--        border-collapse: collapse;-->
+<!--        margin-top: 50px;-->
+<!--        width: 100%;-->
+<!--    }-->
+
+<!--    td {-->
+<!--        padding: 10px;-->
+<!--        text-align: center;-->
+<!--        vertical-align: middle;-->
+<!--    }-->
+
+<!--    img {-->
+<!--        display: block;-->
+<!--        margin-left: auto;-->
+<!--        margin-right: auto;-->
+<!--        width: 200px;-->
+<!--        height: 300px;-->
+<!--    }-->
+
+<!--    .scrollable {-->
+<!--        height: 400px;-->
+<!--        overflow: auto;-->
+<!--    }-->
+<!--</style>-->
+<style>
+  ul#menu li {
+  display:inline;
+}
+</style>
+  <div>
+    <h1>Select Posters to begin Recommendation</h1>
+    <form method="POST" action="/submit">
+      <ul id = "menu">
+        <li>
+          <img height="360" width="240" src="https://image.tmdb.org/t/p/w500/cvr7x3CjBMsHv2GptR0tcFddMSa.jpg" alt="Image 1">
+          <input type="checkbox" name="ids" value="25842">
+        </li>
+        <li>
+          <img height="360" width="240" src="https://image.tmdb.org/t/p/w500/5aOyriWkPec0zUDxmHFP9qMmBaj.jpg" alt="Image 1">
+          <input type="checkbox" name="ids" value="675">
+        </li>
+        <li>
+          <img height="360" width="240" src="https://image.tmdb.org/t/p/w500/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg" alt="Image 1">
+          <input type="checkbox" name="ids" value="862">
+        </li>
+          <li>
+          <img height="360" width="240" src="https://image.tmdb.org/t/p/w500/p7ARuNKUGPGvkBiDtIDvAzYzonX.jpg" alt="Image 1">
+          <input type="checkbox" name="ids" value="9286">
+        </li>
+        <li>
+          <img height="360" width="240" src="https://image.tmdb.org/t/p/w500/ya9bwgqA4eNl5bQ9QqS0jcmRoBS.jpg" alt="Image 1">
+          <input type="checkbox" name="ids" value="12259">
+        </li>
+        <li>
+          <img height="360" width="240" src="https://image.tmdb.org/t/p/w500/yhIsVvcUm7QxzLfT6HW2wLf5ajY.jpg" alt="Image 1">
+          <input type="checkbox" name="ids" value="564">
+        </li>
+              <li>
+          <img height="360" width="240" src="https://image.tmdb.org/t/p/w500/rEPzO9I6LCk6Mxg1X4BsBk6oA3V.jpg" alt="Image 1">
+          <input type="checkbox" name="ids" value="16535">
+        </li>
+          <li>
+          <img height="360" width="240" src="https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg" alt="Image 1">
+          <input type="checkbox" name="ids" value="238">
+        </li>
+        <li>
+          <img height="360" width="240" src="https://image.tmdb.org/t/p/w500/3Gkb6jm6962ADUPaCBqzz9CTbn9.jpg" alt="Image 1">
+          <input type="checkbox" name="ids" value="8966">
+        </li>
+        <li>
+          <img height="360" width="240" src="https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg" alt="Image 1">
+          <input type="checkbox" name="ids" value="557">
+        </li>
+      </ul>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+
+</body>
+
+</html>
